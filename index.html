@@ -545,7 +545,7 @@
     <!-- Your scripts (JS) -->
     <script>
         // Load stories from localStorage or use default
-        let StoriesData = JSON.parse(localStorage.getItem("storiesData")) || [
+        let defaultStories = [
             {
                 id: 1,
                 title: "Finding My Voice Again",
@@ -644,6 +644,15 @@
             }
 
         ];
+
+        let savedStories = JSON.parse(localStorage.getItem("storiesData"));
+    let StoriesData;
+    if (!savedStories) {
+        StoriesData = defaultStories;
+        localStorage.setItem("storiesData", JSON.stringify(defaultStories));
+    } else {
+        StoriesData = savedStories;
+    }
 
         // Show modal
         function openShareStory() {
